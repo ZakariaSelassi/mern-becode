@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.leaflet-container{
+  width:100vw;
+  height:100vh;
+}
+
+.marker{
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #eb2222;
+  opacity: 0.5;
+}
