@@ -9,13 +9,19 @@ import LocationMarker from "./components/LocationMarker";
 
 function App() {
     const [items,setItems] = useState([]);
+    const [itemsBanks,setItemsBanks] = useState([]);
     useEffect(() => {  
-      const fetching = async () => {
+      const fetchingTerminal = async () => {
         const response = await axios.get('http://localhost:3001/read')
-        console.log(response.data);
         return setItems(response.data)
       }
-      fetching()
+      const fetchingBanks = async () => {
+        const response = await axios.get('http://localhost:3001/readBanks')
+        console.log(response.data)
+        return setItemsBanks(response.data)
+      }
+      fetchingTerminal()
+      fetchingBanks()
     },[])
 
     return (
@@ -26,7 +32,7 @@ function App() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
         {
           items.map((terminal,index) => (
-            <Marker key={index} position={[terminal.latitude, terminal.longitude]}>
+            <Marker key={index} position={[terminal.latitude, terminal.longitude]} >
               <Popup>
                 <p>ICI</p>
               </Popup>
