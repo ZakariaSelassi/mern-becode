@@ -39,7 +39,6 @@ app.get('/readBanks', async (req,res) => {
     ]).toArray(function(err,item){
         if(err) throw err;
         res.send(item);
-        client.close();
     });
 
     /*database.collection('banks',function(err,collection){

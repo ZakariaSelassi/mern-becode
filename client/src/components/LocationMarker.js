@@ -5,7 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css'
 import icon from "./Icone";
 
-function LocationMarker() {
+const LocationMarker = (props) =>{
   const [position, setPosition] = useState(null);
   const [bbox, setBbox] = useState([]);
 
@@ -15,8 +15,11 @@ function LocationMarker() {
     map.locate().on("locationfound", function (e) {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
-      const radius = e.accuracy;
-      const circle = L.circle(e.latlng, radius);
+      const circle = L.circle(e.latlng,{
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius:500})
       circle.addTo(map);
       setBbox(e.bounds.toBBoxString().split(","));
     });

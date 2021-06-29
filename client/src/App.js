@@ -12,18 +12,22 @@ function App() {
     const [itemsBanks,setItemsBanks] = useState([]);
     useEffect(() => {  
       const fetchingTerminal = async () => {
-        const response = await axios.get('http://localhost:3001/read')
-        return setItems(response.data)
-      }
-      const fetchingBanks = async () => {
         const response = await axios.get('http://localhost:3001/readBanks')
         console.log(response.data)
-        return setItemsBanks(response.data)
+        return setItems(response.data)
       }
-      fetchingTerminal()
-      fetchingBanks()
-    },[])
 
+      fetchingTerminal()
+    },[])
+    /*const test = () => {
+      items.map(item => {
+        if(typeof item !== 'undefined'){
+          console.log(item.terminalsdetails[0].icon)
+        }
+       
+      })
+    }
+    test()*/
     return (
     <>
       <MapContainer center={[50.4167 ,4.4333]} zoom={15} scrollWheelZoom={true}>
@@ -32,14 +36,11 @@ function App() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
         {
           items.map((terminal,index) => (
-            <Marker key={index} position={[terminal.latitude, terminal.longitude]} >
-              <Popup>
-                <p>ICI</p>
-              </Popup>
+            <Marker key={index} position={[terminal.latitude, terminal.longitude]} icon={icon}>
             </Marker>
           ))
-          }
-          <LocationMarker/>
+        }
+          <LocationMarker databank={items}/>
       </MapContainer>
     </>
   );
